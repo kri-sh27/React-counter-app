@@ -1,0 +1,14 @@
+# Use a base image with Node.js pre-installed
+FROM node:14
+
+# Set the working directory
+WORKDIR /app
+
+# Copy your application files
+COPY . .
+
+# Install dependencies
+RUN npm install
+
+# Start the application
+CMD ["npm", "start"]

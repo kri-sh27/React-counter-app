@@ -1,11 +1,10 @@
 pipeline {
-   agent {
-    docker {
-        image 'jenkins/inbound-agent:latest'
-        args '-v /var/run/docker.sock:/var/run/docker.sock'
+    agent {
+        docker {
+            image 'node:14'  // Specify the Node.js version you need
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
     }
-}
-
 
     stages {
         stage('Checkout') {
@@ -16,8 +15,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'npm install'
-                sh 'npm start'  // Use 'npm start' to run the React app
+                sh 'npm install'   // Use 'npm install' without specifying a path
+                sh 'npm start'     // Use 'npm start' to run the React app
             }
         }
     }
