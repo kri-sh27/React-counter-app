@@ -1,10 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:14'  // Specify the Docker image you want to use
-            args '-v /var/run/docker.sock:/var/run/docker.sock'  // Mount Docker socket if needed
-        }
+   agent {
+    docker {
+        image 'jenkins/inbound-agent:latest'
+        args '-v /var/run/docker.sock:/var/run/docker.sock'
     }
+}
+
 
     stages {
         stage('Checkout') {
