@@ -1,15 +1,8 @@
 pipeline {
-    // agent docker {
-    //      environment {
-    //     NODEJS_VERSION = '18' // Specify the Node.js version you want to install
-    // }
-    // }
     agent {
         docker {
-            // image 'node:18'
-            environment {
-        NODEJS_VERSION = '18' // Specify the Node.js version you want to install
-    }
+            image 'node:18'
+            NODEJS_VERSION = '18'
         }
     }
 
@@ -32,11 +25,10 @@ pipeline {
             }
         }
 
-
-         stages {
-        stage('Install Node.js') {
-            steps {
-                script {
+        stages {
+            stage('Install Node.js') {
+                steps {
+                    script {
                     def toolName = "NodeJS-${NODEJS_VERSION}" // Define a tool name based on the version
                     def installation = tool name: toolName, type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
 
@@ -47,16 +39,17 @@ pipeline {
                 }
             }
         }
+        }
 
         stage('Build') {
             steps {
                 // script {
-                    // def nodejsInstallation = tool name: 'NodeJS', type: 'NodeJSInstallation'
-                    // nodejs(nodejsInstallation) {
+                //     def nodejsInstallation = tool name: 'NodeJS', type: 'NodeJSInstallation'
+                //     nodejs(nodejsInstallation) {
                         sh 'npm install'
                         sh 'npm start'
                     // }
-                }
+                // }
             }
         }
     }
