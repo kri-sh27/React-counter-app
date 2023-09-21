@@ -1,14 +1,17 @@
 pipeline {
-    agent docker {
-         environment {
+    // agent docker {
+    //      environment {
+    //     NODEJS_VERSION = '18' // Specify the Node.js version you want to install
+    // }
+    // }
+    agent {
+        docker {
+            // image 'node:18'
+            environment {
         NODEJS_VERSION = '18' // Specify the Node.js version you want to install
     }
+        }
     }
-    // agent {
-    //     docker {
-    //         image 'node:18'
-    //     }
-    // }
 
     stages {
         stage('Checkout') {
