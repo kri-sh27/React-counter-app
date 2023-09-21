@@ -27,11 +27,11 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    def nodejsInstallation = tool name: 'NodeJS', type: 'NodeJSInstallation'
-                    nodejs(nodejsInstallation) {
+                    // def nodejsInstallation = tool name: 'NodeJS', type: 'NodeJSInstallation'
+                    // nodejs(nodejsInstallation) {
                         sh 'npm install'
                         sh 'npm start'
-                    }
+                    // }
                 }
             }
         }
