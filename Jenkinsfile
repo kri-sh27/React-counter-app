@@ -1,8 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:14'  // Specify the Node.js version you need
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+            image 'node:14'
         }
     }
 
@@ -13,10 +12,27 @@ pipeline {
             }
         }
 
+        stage('Clear NPM Cache') {
+            steps {
+                sh 'npm cache clean -f'
+            }
+        }
+
+        stage('Fix Workspace Permissions') {
+            steps {
+                sh 'chmod -R 777 /var/lib/jenkins/workspace/counterapp'
+            }
+        }
+
         stage('Build') {
             steps {
-                sh 'npm install'   // Use 'npm install' without specifying a path
-                sh 'npm start'     // Use 'npm start' to run the React app
+                script {
+                    def nodejsInstallation = tool name: 'NodeJS', type: 'NodeJSInstallation'
+                    nodejs(nodejsInstallation) {
+                        sh 'npm install'
+                        sh 'npm start'
+                    }
+                }
             }
         }
     }
