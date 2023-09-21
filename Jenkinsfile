@@ -1,5 +1,5 @@
 pipeline {
-    agent any {
+    agent docker {
          environment {
         NODEJS_VERSION = '18' // Specify the Node.js version you want to install
     }
