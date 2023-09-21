@@ -4,11 +4,11 @@ pipeline {
         NODEJS_VERSION = '18' // Specify the Node.js version you want to install
     }
     }
-    agent {
-        docker {
-            image 'node:18'
-        }
-    }
+    // agent {
+    //     docker {
+    //         image 'node:18'
+    //     }
+    // }
 
     stages {
         stage('Checkout') {
